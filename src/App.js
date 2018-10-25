@@ -2,6 +2,7 @@ import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import ImageUploader from './component/index.js';
 import { rainbow } from 'react-syntax-highlighter/styles/hljs';
+import UploadIcon from './component/UploadIcon.svg';
 
 const steps = {
     one: `npm install --save react-images-upload`,
@@ -28,8 +29,9 @@ class App extends React.Component {
                 withIcon={true}
                 buttonText='Choose images'
                 onChange={this.onDrop}
-                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                imgExtension={['.jpg', '.gif', '.png', '.gif', '.svg']}
                 maxFileSize={5242880}
+                defaultImage={[UploadIcon]}
             />
         );
     }
@@ -38,13 +40,22 @@ class App extends React.Component {
 
 
 export default class App extends React.PureComponent {
+
+    onClick = (index) => {
+
+    }
+
+    onChange = (a,b) => {
+        console.log(b);
+    }
+
     render() {
         return (
             <div className="page">
                 <h1>React-images-upload</h1>
                 <p>Simple component for upload and validate (client side) images with preview built with React.js.</p>
                 <div className="head">Demo</div>
-                <ImageUploader style={{ maxWidth: '500px', margin: "20px auto" }}
+                <ImageUploader style={{ maxWidth: '500px', margin: "20px auto" }} onChange={this.onChange} defaultImage={[UploadIcon,UploadIcon]} onPreviewClick={(a,b) => console.log(b)}
                                withPreview={true} />
                 <div className="head">Installation</div>
                 <SyntaxHighlighter language='javascript' showLineNumbers={true} style={rainbow}>
